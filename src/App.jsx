@@ -5,6 +5,9 @@ import {
 } from "@mui/material/styles";
 
 import { red } from "@mui/material/colors";
+import { Toaster } from "react-hot-toast";
+import Layout from "./layout/layout";
+
 
 const theme = extendTheme({
   colorSchemes: {
@@ -28,7 +31,9 @@ function App() {
   return (
     <CssVarsProvider theme={theme}>
       <div>
+      <Toaster/> 
         <Navbar />
+        <Layout/>
       </div>
     </CssVarsProvider>
   );
