@@ -10,6 +10,8 @@ import Layout from "./layout/layout";
 import CharacterProvider from "./context/characterProvider";
 
 
+
+
 const theme = extendTheme({
   colorSchemes: {
     light: {
@@ -29,10 +31,11 @@ const theme = extendTheme({
   },
 });
 function App() {
+
   return (
    <CharacterProvider >
      <CssVarsProvider theme={theme}>
-      <div>
+      <div >
       <Toaster/> 
         <Navbar />
         <Layout/>

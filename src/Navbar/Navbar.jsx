@@ -52,10 +52,12 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 function Navbar() {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
+ 
+  const [darkMode, setDarkMode] = useState(true)
   return (
     <div>
       <div className="mx-auto container">
-        <nav className="p-2 border-2 m-2 rounded-lg border-slate-200">
+        <nav className="p-2 border-2 m-2 rounded-lg border-slate-200 dark:border-slate-800">
           <ul className="flex items-center justify-between sm:justify-around">
             <li>
               <img
@@ -68,7 +70,7 @@ function Navbar() {
               <input
                 type="search"
                 placeholder="search something ..."
-                className="p-[6px] outline-none border-none rounded-md bg-slate-200 placeholder:text-sm"
+                className="p-[6px] outline-none border-none rounded-md bg-slate-200 dark:bg-slate-800 placeholder:text-sm"
               />
             </li>
             <li className="hidden sm:block font-bold text-lg">found x items</li>
@@ -83,26 +85,36 @@ function Navbar() {
             <li>
               <button className="hidden sm:block">
                 <FormControlLabel
-                  control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+                  control={
+                    <MaterialUISwitch
+                      value={darkMode}
+                      onChange={()=>setDarkMode(prev=>!prev)}
+                      sx={{ m: 1 }}
+                      defaultChecked
+                    />
+                  }
                   label="Theme"
                 />
               </button>
             </li>
             <li className="sm:hidden">
-              <button onClick={()=>setOpenHamburgerMenu(open=>!open)} className="text-2xl">
+              <button
+                onClick={() => setOpenHamburgerMenu((open) => !open)}
+                className="text-2xl"
+              >
                 <HiBars3 />
               </button>
             </li>
           </ul>
           {openHamburgerMenu && (
             <div className="sm:hidden flex justify-center">
-              <div className="bg-slate-200 absolute w-[90%] p-2 rounded-lg m-auto">
+              <div className="bg-slate-200 dark:bg-slate-800 absolute w-[90%] p-2 rounded-lg m-auto">
                 <ul>
                   <li className="p-2">
                     <input
                       type="search"
                       placeholder="search something ..."
-                      className="w-[100%] p-2 bg-white outline-none border-none rounded-lg"
+                      className="w-[100%] p-2 bg-white dark:bg-slate-950 outline-none border-none rounded-lg"
                     />
                   </li>
                   <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">

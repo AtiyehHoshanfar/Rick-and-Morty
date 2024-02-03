@@ -15,7 +15,7 @@ function Episodes() {
   console.log(data);
   if (isLoading) return <p> i loading epiode</p>;
   return (
-    <div className="flex flex-col rounded-lg bg-slate-200 m-2">
+    <div className="flex flex-col rounded-lg bg-slate-200 dark:bg-slate-800 m-2">
      {/* { data.map(episode=><Episode key={episode.id} />)} */}
      <Episode/>
     </div>
@@ -26,7 +26,7 @@ export default Episodes;
 
 function Episode() {
   return (
-    <div className="bg-slate-300 rounded-lg  p-2 m-2">
+    <div className="bg-slate-300 dark:bg-slate-700 rounded-lg  p-2 m-2">
       <div className="flex mb-1">
         <button>➕</button>
         &nbsp;

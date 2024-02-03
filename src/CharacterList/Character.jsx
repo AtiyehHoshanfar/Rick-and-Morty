@@ -4,7 +4,7 @@ function Character({character}) {
   const{setSelectedCharacterId}=useCharacter()
   return (
     <div onClick={()=>setSelectedCharacterId(character)}
-    className="p-[6px] rounded-xl mb-2 bg-slate-300 flex flex-col sm:flex-row hover:shadow-md transition-all hover:bg-slate-500"
+    className="p-[6px] rounded-xl mb-2 bg-slate-300 dark:bg-slate-700 flex flex-col sm:flex-row hover:shadow-md transition-all  hover:bg-slate-500"
   >
     <img
       className="rounded-lg sm:w-24"
@@ -17,7 +17,7 @@ function Character({character}) {
         <div
           className={`w-3 h-3 rounded-full sm:w-4 sm:h-4 ${character.status==="Dead"?"bg-red-500":"bg-green-500"}`}
         ></div>
-        <div className="font-medium text-sm text-slate-700 sm:text-lg">
+        <div className="font-medium text-sm dark:text-slate-300 text-slate-700 sm:text-lg">
           &nbsp; {character.status} - {character.species}
         </div>
       </div>
