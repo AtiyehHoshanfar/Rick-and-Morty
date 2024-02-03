@@ -3,6 +3,8 @@ import { Badge, FormControlLabel, Switch } from "@mui/material";
 import { useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
+import Modal from "../Modal/Modal";
+import { useCharacter } from "../context/characterProvider";
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -52,7 +54,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 function Navbar() {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
- 
+ const [openFavorites,setOpenFavorites]=useState(false)
+ const { favoriteCharacters } = useCharacter();
   const [darkMode, setDarkMode] = useState(true)
   return (
     <div>
@@ -74,8 +77,8 @@ function Navbar() {
               />
             </li>
             <li className="hidden sm:block font-bold text-lg">found x items</li>
-            <li className="hidden sm:block">
-              <Badge badgeContent={4} color="primary">
+            <li className="hidden sm:block" onClick={()=>setOpenFavorites(open=>!open)}>
+              <Badge badgeContent={favoriteCharacters.length} color="primary">
                 <HiOutlineHeart
                   color="action"
                   className="text-2xl text-red-500"
@@ -132,6 +135,7 @@ function Navbar() {
           )}
         </nav>
       </div>
+      {openFavorites&&<Modal/>}
     </div>
   );
 }

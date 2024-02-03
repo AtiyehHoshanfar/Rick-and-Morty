@@ -2,7 +2,8 @@ import  { createContext, useContext, useState } from 'react'
 const CharacterContext=createContext()
 function CharacterProvider({children}) {
     const [selectedCharacterId,setSelectedCharacterId]=useState(null);
-  return (<CharacterContext.Provider value={{selectedCharacterId,setSelectedCharacterId}}>
+    const [favoriteCharacters, setFavoriteCharacters] = useState([]);
+  return (<CharacterContext.Provider value={{selectedCharacterId,setSelectedCharacterId,favoriteCharacters,setFavoriteCharacters}}>
     {children}
     </CharacterContext.Provider>
   )

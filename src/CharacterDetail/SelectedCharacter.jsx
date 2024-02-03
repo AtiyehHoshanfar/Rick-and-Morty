@@ -1,7 +1,24 @@
 import { useCharacter } from "../context/characterProvider";
 
 function SelectedCharacter() {
-  const { selectedCharacterId } = useCharacter();
+  const { selectedCharacterId,favoriteCharacters,setFavoriteCharacters} = useCharacter();
+  
+  console.log(favoriteCharacters);
+  const handleAddToFavoriteCharacter = (character) => {
+    let newFavoriteCharacter = {
+      id:character.id,
+      name: character.name,
+      gender: character.gender,
+      status: character.status,
+      species: character.species,
+      image:character.image
+    };
+    setFavoriteCharacters((prevCharacters) => [
+      ...prevCharacters,
+      newFavoriteCharacter,
+    ]);
+    
+  };
   return (
     <div className="p-[6px] relative rounded-xl m-2 dark:bg-slate-700 bg-slate-300 flex flex-col sm:flex-row">
       <img
@@ -9,8 +26,12 @@ function SelectedCharacter() {
         src={selectedCharacterId.image}
         alt=""
       />
-      <button className="absolute w-8 h-8 dark:bg-slate-950 bg-white rounded-full right-3 top-3 flex items-center justify-center">
-        ❤️
+      <button 
+        onClick={() => handleAddToFavoriteCharacter(selectedCharacterId)}
+        disabled={favoriteCharacters.find(favoriteCharacter=>favoriteCharacter.id===selectedCharacterId.id)}
+        className="absolute p-3 w-auto h-8 dark:bg-slate-950 bg-white rounded-full right-3 top-3 flex items-center justify-center"
+      >
+       {favoriteCharacters.find(favoriteCharacter=>favoriteCharacter.id===selectedCharacterId.id)?"is added before":"❤️"}
       </button>
       <div className="p-2 sm:flex sm:flex-col sm:py-3 sm:justify-between">
         <h2 className="font-bold text-2xl sm:text-xl">
