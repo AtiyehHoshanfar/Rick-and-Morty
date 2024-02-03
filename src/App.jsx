@@ -7,6 +7,7 @@ import {
 import { red } from "@mui/material/colors";
 import { Toaster } from "react-hot-toast";
 import Layout from "./layout/layout";
+import CharacterProvider from "./context/characterProvider";
 
 
 const theme = extendTheme({
@@ -29,13 +30,15 @@ const theme = extendTheme({
 });
 function App() {
   return (
-    <CssVarsProvider theme={theme}>
+   <CharacterProvider >
+     <CssVarsProvider theme={theme}>
       <div>
       <Toaster/> 
         <Navbar />
         <Layout/>
       </div>
     </CssVarsProvider>
+   </CharacterProvider>
   );
 }
 
