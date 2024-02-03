@@ -4,7 +4,7 @@ function Character({character}) {
   const{setSelectedCharacterId}=useCharacter()
   return (
     <div onClick={()=>setSelectedCharacterId(character)}
-    className="p-[6px] rounded-xl mb-2 bg-slate-300 dark:bg-slate-700 flex flex-col sm:flex-row hover:shadow-md transition-all  hover:bg-slate-500"
+    className="p-[6px] rounded-xl mb-2 bg-slate-300 dark:bg-slate-700 flex flex-col sm:flex-row focus:shadow-md transition-all  hover:bg-slate-500"
   >
     <img
       className="rounded-lg sm:w-24"
