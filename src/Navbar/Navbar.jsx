@@ -1,17 +1,23 @@
 import { Badge } from "@mui/material";
-import { useState } from "react";
+import {  useRef, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
 import Modal from "../Modal/Modal";
 import { useCharacter } from "../context/characterProvider";
 import useDarkMode from "../hook/useDarkMode";
+import useOutSideClick from "../hook/useOutSideClick";
+
 
 function Navbar() {
+  const menuRef = useRef();
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
+  useOutSideClick(menuRef, "exceptionId", () => setOpenHamburgerMenu(false));
   const [openFavorites, setOpenFavorites] = useState(false);
   const { favoriteCharacters } = useCharacter();
   const [colorTheme, setTheme] = useDarkMode();
   const [darkSide, setDarkSide] = useState(colorTheme === "dark");
+
+  console.log(openHamburgerMenu);
   const handleToggleDarkmode = (checked) => {
     setTheme(colorTheme);
     setDarkSide(checked.target.checked);
@@ -48,7 +54,6 @@ function Navbar() {
               </Badge>
             </li>
             <li className="hidden sm:block">
-
               <input
                 type="checkbox"
                 checked={darkSide}
@@ -67,30 +72,33 @@ function Navbar() {
               </button>
             </li>
           </ul>
-          {openHamburgerMenu && (
-            <div className="sm:hidden flex justify-center">
-              <div className="bg-slate-200 dark:bg-slate-800 absolute w-[90%] p-2 rounded-lg m-auto">
-                <ul>
-                  <li className="p-2">
-                    <input
-                      type="search"
-                      placeholder="search something ..."
-                      className="w-[100%] p-2 bg-white dark:bg-slate-950 outline-none border-none rounded-lg"
-                    />
-                  </li>
-                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
-                    Home
-                  </li>
-                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
-                    Favorite
-                  </li>
-                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
-                    Theme
-                  </li>
-                </ul>
-              </div>
-            </div>
-          )}
+          {openHamburgerMenu &&<div
+
+      className="sm:hidden flex justify-center"
+      ref={menuRef}
+      id="exceptionId"
+    >
+      <div className="bg-slate-200 dark:bg-slate-800 absolute w-[90%] p-2 rounded-lg m-auto z-[2000]">
+        <ul>
+          <li className="p-2">
+            <input
+              type="search"
+              placeholder="search something ..."
+              className="w-[100%] p-2 bg-white dark:bg-slate-950 outline-none border-none rounded-lg"
+            />
+          </li>
+          <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
+            Home
+          </li>
+          <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
+            Favorite
+          </li>
+          <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
+            Theme
+          </li>
+        </ul>
+      </div>
+    </div> }
         </nav>
       </div>
       {openFavorites && <Modal />}
@@ -99,3 +107,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
