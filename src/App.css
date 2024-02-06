@@ -1,0 +1,33 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: #cbd5e1;
+  border-radius: 20px;
+}
+.switch::after {
+  content: "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s;
+}
+.checkbox:checked + .switch::after {
+  left: 20px;
+  background-color: #1e293b;
+
+}
+.checkbox:checked + .switch {
+  background-color: #fff;
+}
+.checkbox { 
+    display : none;
+ }

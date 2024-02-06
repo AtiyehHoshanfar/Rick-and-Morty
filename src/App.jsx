@@ -3,7 +3,7 @@ import {
   Experimental_CssVarsProvider as CssVarsProvider,
   experimental_extendTheme as extendTheme,
 } from "@mui/material/styles";
-
+import "./App.css"
 import { red } from "@mui/material/colors";
 import { Toaster } from "react-hot-toast";
 import Layout from "./layout/layout";
