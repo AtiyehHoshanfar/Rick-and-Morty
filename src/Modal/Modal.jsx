@@ -1,13 +1,13 @@
 import { useCharacter } from "../context/characterProvider";
 
-function Modal({ setOpenFavorites }) {
+function Modal({ handleOpen }) {
   const { favoriteCharacters } = useCharacter();
 
   return (
     <div className="flex justify-center">
       <div
         className="fixed top-0 z-[2] right-0 backdrop-blur-md w-full h-screen"
-        onClick={() => setOpenFavorites(false)}
+        onClick={() => handleOpen(false)}
       ></div>
       <div
         className="w-[90%] sm:w-[60%] z-10 bg-slate-300 rounded-lg m-auto p-2 sm:p-4"

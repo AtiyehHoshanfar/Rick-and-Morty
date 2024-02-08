@@ -1,5 +1,5 @@
 import { Badge } from "@mui/material";
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
 import Modal from "../Modal/Modal";
@@ -7,12 +7,12 @@ import { useCharacter } from "../context/characterProvider";
 import useDarkMode from "../hook/useDarkMode";
 import useOutSideClick from "../hook/useOutSideClick";
 
-
 function Navbar() {
   const menuRef = useRef();
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
   useOutSideClick(menuRef, "exceptionId", () => setOpenHamburgerMenu(false));
   const [openFavorites, setOpenFavorites] = useState(false);
+  const [openFavoritesMobile, setOpenFavoritesMobile] = useState(false);
   const { favoriteCharacters } = useCharacter();
   const [colorTheme, setTheme] = useDarkMode();
   const [darkSide, setDarkSide] = useState(colorTheme === "dark");
@@ -72,40 +72,54 @@ function Navbar() {
               </button>
             </li>
           </ul>
-          {openHamburgerMenu &&<div
+          {openHamburgerMenu && (
+            <div
+              className="sm:hidden flex justify-center"
+              ref={menuRef}
+              id="exceptionId"
+            >
+              <div className="bg-slate-200 dark:bg-slate-800 absolute w-[90%] p-2 rounded-lg m-auto z-[2]">
+                <ul>
+                  <li className="p-2">
+                    <input
+                      type="search"
+                      placeholder="search something ..."
+                      className="w-[100%] p-2 bg-white dark:bg-slate-950 outline-none border-none rounded-lg"
+                    />
+                  </li>
+                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
+                    Home
+                  </li>
+                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500"
+                  onClick={() => setOpenFavoritesMobile((open) => !open)}>
+                    Favorite
+                  </li>
+                  <li className=" flex items-center justify-between rounded-md  hover:transition-all hover:font-bold hover:bg-slate-500">
+                    <label
+                      htmlFor="toggle"
+                      className="block w-full h-full p-2"
+                    >
+                      Theme
+                      <input
+                        type="checkbox"
+                        checked={darkSide}
+                        onChange={handleToggleDarkmode}
+                        id="toggle"
+                        className="hidden"
+                      />
+                    </label>
 
-      className="sm:hidden flex justify-center"
-      ref={menuRef}
-      id="exceptionId"
-    >
-      <div className="bg-slate-200 dark:bg-slate-800 absolute w-[90%] p-2 rounded-lg m-auto z-[2000]">
-        <ul>
-          <li className="p-2">
-            <input
-              type="search"
-              placeholder="search something ..."
-              className="w-[100%] p-2 bg-white dark:bg-slate-950 outline-none border-none rounded-lg"
-            />
-          </li>
-          <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
-            Home
-          </li>
-          <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
-            Favorite
-          </li>
-          <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
-            Theme
-          </li>
-        </ul>
-      </div>
-    </div> }
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
         </nav>
       </div>
-      {openFavorites && <Modal />}
+      {openFavorites && <Modal  handleOpen={setOpenFavorites } />}
+      {openFavoritesMobile&&<Modal  handleOpen={setOpenFavoritesMobile } />}
     </div>
   );
 }
 
 export default Navbar;
-
-
