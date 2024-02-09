@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
 import Modal from "../Modal/Modal";
-import { useCharacter } from "../context/characterProvider";
+import { useCharacter } from "../context/CharacterProvider";
 import useDarkMode from "../hook/useDarkMode";
 import useOutSideClick from "../hook/useOutSideClick";
 
@@ -17,7 +17,6 @@ function Navbar() {
   const [colorTheme, setTheme] = useDarkMode();
   const [darkSide, setDarkSide] = useState(colorTheme === "dark");
 
-  console.log(openHamburgerMenu);
   const handleToggleDarkmode = (checked) => {
     setTheme(colorTheme);
     setDarkSide(checked.target.checked);

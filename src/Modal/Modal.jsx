@@ -1,4 +1,4 @@
-import { useCharacter } from "../context/characterProvider";
+import { useCharacter } from "../context/CharacterProvider";
 
 function Modal({ handleOpen }) {
   const { favoriteCharacters } = useCharacter();

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import CharacterDetail from "../CharacterDetail/CharacterDetail";
 import CharacterList from "../CharacterList/CharacterList";
-import { useCharacter } from "../context/characterProvider";
+import { useCharacter } from "../context/CharacterProvider";
 
 function Layout() {
-  const { selectedCharacterId } = useCharacter();
+  const { selectedCharacter } = useCharacter();
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 640;
   useEffect(() => {
@@ -14,8 +14,8 @@ function Layout() {
   }, []);
   return (
     <div className="flex justify-between container  m-auto ">
-    {selectedCharacterId&&width<breakpoint?"": <CharacterList /> }  
-      {selectedCharacterId && <CharacterDetail />}
+    {selectedCharacter&&width<breakpoint?"": <CharacterList /> }  
+      {selectedCharacter && <CharacterDetail />}
     </div>
   );
 }

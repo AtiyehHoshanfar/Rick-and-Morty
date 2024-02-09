@@ -6,8 +6,8 @@ import {
 import "./App.css"
 import { red } from "@mui/material/colors";
 import { Toaster } from "react-hot-toast";
-import Layout from "./layout/layout";
-import CharacterProvider from "./context/characterProvider";
+import Layout from "./Layout/Layout";
+import CharacterProvider from "./context/CharacterProvider";
 
 
 

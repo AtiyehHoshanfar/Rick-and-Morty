@@ -1,9 +1,9 @@
-import { useCharacter } from "../context/characterProvider"
+import { useCharacter } from "../context/CharacterProvider"
 
 function Character({character}) {
-  const{setSelectedCharacterId}=useCharacter()
+  const{setSelectedCharacter}=useCharacter()
   return (
-    <div onClick={()=>setSelectedCharacterId(character)}
+    <div onClick={()=>setSelectedCharacter(character)}
     className="p-[6px] rounded-xl mb-2 bg-slate-300 dark:bg-slate-700 flex flex-col sm:flex-row focus:shadow-md transition-all  hover:bg-slate-500"
   >
     <img

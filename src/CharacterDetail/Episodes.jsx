@@ -1,10 +1,10 @@
-import { useCharacter } from "../context/characterProvider";
+import { useCharacter } from "../context/CharacterProvider";
 import useFetch from "../hook/useFetch";
 
 function Episodes() {
-  const { selectedCharacterId } = useCharacter();
+  const { selectedCharacter } = useCharacter();
 
-  const episodesId = selectedCharacterId.episode.map((e) =>
+  const episodesId = selectedCharacter.episode.map((e) =>
     e.split("/").at(-1)
   );
 
