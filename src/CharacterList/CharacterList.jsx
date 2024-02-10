@@ -11,11 +11,13 @@ function CharacterList() {
   if (isLoading) return <p> is loading data ...</p>;
 
   return (
-    <div className="grid grid-cols-2 m-2 gap-2 sm:grid-cols-1">
-      {data.map((character) => (
+<div>
+<div className="grid grid-cols-2 m-2 gap-2 sm:grid-cols-1">
+      {data.results?.map((character) => (
         <Character character={character} key={character.id} />
       ))}
     </div>
+</div>
   );
 }
 

@@ -3,9 +3,9 @@ const CharacterContext = createContext();
 function CharacterProvider({ children }) {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [favoriteCharacters, setFavoriteCharacters] = useState(
-    JSON.parse(localStorage.getItem("FAVORITES")) || []
+    JSON.parse(localStorage.getItem("FAVORITES-CHARACTERS")) || []
   );
-  localStorage.setItem("FAVORITES", JSON.stringify(favoriteCharacters));
+  localStorage.setItem("FAVORITES-CHARACTERS", JSON.stringify(favoriteCharacters));
   return (
     <CharacterContext.Provider
       value={{

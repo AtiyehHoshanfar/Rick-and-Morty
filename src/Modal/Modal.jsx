@@ -1,33 +1,52 @@
+import { useState } from "react";
 import { useCharacter } from "../context/CharacterProvider";
+import { useEpisode } from "../context/EpisodeProvider";
+import Episode from "../episodes/Episode";
 
 function Modal({ handleOpen }) {
   const { favoriteCharacters } = useCharacter();
-
+  const { favoriteEpisodes } = useEpisode();
+  const [favoriteItem, setFavoriteItem] = useState("character");
   return (
     <div className="flex justify-center">
       <div
         className="fixed top-0 z-[2] right-0 backdrop-blur-md w-full h-screen"
         onClick={() => handleOpen(false)}
       ></div>
-      <div
-        className="w-[90%] sm:w-[60%] z-10 bg-slate-300 rounded-lg m-auto p-2 sm:p-4"
-      >
+      <div className="w-[90%] sm:w-[60%] z-10 bg-slate-300 rounded-lg m-auto p-2 sm:p-4 ">
         <div className="relative  overflow-hidden flex m-2 items-center justify-around p-1 bg-slate-200 rounded-full">
-          <button className="relative  flex-1 p-2 rounded-tl-lg rounded-tr-lg text-slate-800 ">
+          <button
+            onClick={() => setFavoriteItem("character")}
+            className="relative  flex-1 p-2 rounded-tl-lg rounded-tr-lg text-slate-800 "
+          >
             Characters
           </button>
-          <button className="flex-1 p-2 rounded-lg text-slate-800">
+          <button
+            className="flex-1 p-2 rounded-lg text-slate-800"
+            onClick={() => setFavoriteItem("episode")}
+          >
             Episodes
           </button>
-          <div className="absolute z-10 rounded-full bg-black opacity-20 w-[50%] h-full top-0 right-0"></div>
+          <div
+            className={`absolute z-10 rounded-full bg-black opacity-20 w-[50%] h-full transition-all  top-0 left-0 ${
+              favoriteItem === "character"
+                ? "translate-x-0"
+                : "translate-x-[100%]"
+            }`}
+          ></div>
         </div>
         <div className="grid grid-cols-1 gap-2 mx-2 ">
-          {favoriteCharacters.map((favoriteCharacter) => (
-            <ModalItem
-              key={favoriteCharacter.id}
-              favoriteCharacter={favoriteCharacter}
-            />
-          ))}
+          {favoriteItem === "character" &&
+            favoriteCharacters.map((favoriteCharacter) => (
+              <ModalCharacter
+                key={favoriteCharacter.id}
+                favoriteCharacter={favoriteCharacter}
+              />
+            ))}
+          {favoriteItem === "episode" &&
+            favoriteEpisodes.map((favoriteEpisode) => (
+              <Episode key={favoriteEpisode.id} episode={favoriteEpisode} />
+            ))}
         </div>
       </div>
     </div>
@@ -35,7 +54,8 @@ function Modal({ handleOpen }) {
 }
 
 export default Modal;
-function ModalItem({ favoriteCharacter }) {
+function ModalCharacter({ favoriteCharacter }) {
+  console.log(favoriteCharacter);
   return (
     <div className="p-[6px] rounded-xl bg-slate-600 flex flex-row hover:shadow-md transition-all hover:bg-slate-500">
       <img className="rounded-lg w-24" src={favoriteCharacter.image} alt="" />

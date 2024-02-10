@@ -1,4 +1,4 @@
-import Episodes from "./Episodes";
+import Episodes from "../episodes/Episodes";
 import SelectedCharacter from "./SelectedCharacter";
 
 function CharacterDetail() {

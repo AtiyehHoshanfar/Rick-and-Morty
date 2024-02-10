@@ -43,7 +43,7 @@ function SelectedCharacter() {
             } sm:w-4 sm:h-4`}
           ></div>
           <div className="font-medium text-sm text-slate-500 sm:text-lg">
-            &nbsp; Alive - Human
+            &nbsp; {selectedCharacter.status} - {selectedCharacter.species}
           </div>
         </div>
         <div className="font-medium text-sm text-slate-500 sm:text-lg">

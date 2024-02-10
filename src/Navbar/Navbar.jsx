@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 import { useCharacter } from "../context/CharacterProvider";
 import useDarkMode from "../hook/useDarkMode";
 import useOutSideClick from "../hook/useOutSideClick";
+import { useEpisode } from "../context/EpisodeProvider";
 
 function Navbar() {
   const menuRef = useRef();
@@ -14,6 +15,8 @@ function Navbar() {
   const [openFavorites, setOpenFavorites] = useState(false);
   const [openFavoritesMobile, setOpenFavoritesMobile] = useState(false);
   const { favoriteCharacters } = useCharacter();
+  const { favoriteEpisodes } = useEpisode();
+
   const [colorTheme, setTheme] = useDarkMode();
   const [darkSide, setDarkSide] = useState(colorTheme === "dark");
 
@@ -45,7 +48,7 @@ function Navbar() {
               className="hidden sm:block"
               onClick={() => setOpenFavorites((open) => !open)}
             >
-              <Badge badgeContent={favoriteCharacters.length} color="primary">
+              <Badge badgeContent={favoriteCharacters.length+favoriteEpisodes.length} color="primary">
                 <HiOutlineHeart
                   color="action"
                   className="text-2xl text-red-500"
