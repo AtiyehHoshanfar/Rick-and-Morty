@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Layout from "./Layout/Layout";
 import CharacterProvider from "./context/CharacterProvider";
 import EpisodeProvider from "./context/EpisodeProvider";
+import SearchProvider from "./context/SearchProvider";
 
 const theme = extendTheme({
   colorSchemes: {
@@ -30,6 +31,7 @@ const theme = extendTheme({
 });
 function App() {
   return (
+    <SearchProvider>
     <CharacterProvider>
       <EpisodeProvider>
         <CssVarsProvider theme={theme}>
@@ -41,6 +43,7 @@ function App() {
         </CssVarsProvider>
       </EpisodeProvider>
     </CharacterProvider>
+    </SearchProvider>
   );
 }
 

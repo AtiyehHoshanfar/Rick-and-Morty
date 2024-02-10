@@ -1,5 +1,5 @@
 import { Badge } from "@mui/material";
-import { useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
 import Modal from "../Modal/Modal";
@@ -7,6 +7,7 @@ import { useCharacter } from "../context/CharacterProvider";
 import useDarkMode from "../hook/useDarkMode";
 import useOutSideClick from "../hook/useOutSideClick";
 import { useEpisode } from "../context/EpisodeProvider";
+import { useSearch } from "../context/SearchProvider";
 
 function Navbar() {
   const menuRef = useRef();
@@ -16,14 +17,13 @@ function Navbar() {
   const [openFavoritesMobile, setOpenFavoritesMobile] = useState(false);
   const { favoriteCharacters } = useCharacter();
   const { favoriteEpisodes } = useEpisode();
-
   const [colorTheme, setTheme] = useDarkMode();
   const [darkSide, setDarkSide] = useState(colorTheme === "dark");
-
   const handleToggleDarkmode = (checked) => {
     setTheme(colorTheme);
     setDarkSide(checked.target.checked);
   };
+const { searchValue, setSearchValue }=useSearch()
   return (
     <div>
       <div className="mx-auto container">
@@ -38,6 +38,8 @@ function Navbar() {
             </li>
             <li className="hidden sm:block">
               <input
+              onChange={(e)=>setSearchValue(e.target.value)}
+              value={searchValue}
                 type="search"
                 placeholder="search something ..."
                 className="p-[6px] outline-none border-none rounded-md bg-slate-200 dark:bg-slate-800 placeholder:text-sm"

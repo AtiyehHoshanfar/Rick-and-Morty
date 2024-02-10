@@ -1,11 +1,13 @@
 
+import { useSearch } from "../context/SearchProvider";
 import useFetch from "../hook/useFetch";
 import Character from "./Character";
 
 function CharacterList() {
+  const{ searchValue }=useSearch()
   const { isLoading, data } = useFetch(
     "https://rickandmortyapi.com/api/character",
-    ""
+    searchValue
   );
 
   if (isLoading) return <p> is loading data ...</p>;
