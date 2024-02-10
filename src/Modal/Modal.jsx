@@ -13,22 +13,22 @@ function Modal({ handleOpen }) {
         className="fixed top-0 z-[2] right-0 backdrop-blur-md w-full h-screen"
         onClick={() => handleOpen(false)}
       ></div>
-      <div className="w-[90%] sm:w-[60%] z-10 bg-slate-300 rounded-lg m-auto p-2 sm:p-4 ">
-        <div className="relative  overflow-hidden flex m-2 items-center justify-around p-1 bg-slate-200 rounded-full">
+      <div className="w-[90%] sm:w-[60%] z-10 bg-slate-300 rounded-lg m-auto p-2 sm:p-4 dark:bg-slate-700 ">
+        <div className="relative  overflow-hidden flex m-2 items-center justify-around p-1 bg-slate-200 rounded-full dark:bg-slate-800">
           <button
             onClick={() => setFavoriteItem("character")}
-            className="relative  flex-1 p-2 rounded-tl-lg rounded-tr-lg text-slate-800 "
+            className="relative  flex-1 p-2 rounded-tl-lg rounded-tr-lg text-slate-800  dark:text-slate-200"
           >
             Characters
           </button>
           <button
-            className="flex-1 p-2 rounded-lg text-slate-800"
+            className="flex-1 p-2 rounded-lg text-slate-800 dark:text-slate-200"
             onClick={() => setFavoriteItem("episode")}
           >
             Episodes
           </button>
           <div
-            className={`absolute z-10 rounded-full bg-black opacity-20 w-[50%] h-full transition-all  top-0 left-0 ${
+            className={`absolute z-10 rounded-full dark:bg-white bg-black opacity-20 w-[50%] h-full transition-all  top-0 left-0 ${
               favoriteItem === "character"
                 ? "translate-x-0"
                 : "translate-x-[100%]"
@@ -57,7 +57,7 @@ export default Modal;
 function ModalCharacter({ favoriteCharacter }) {
   console.log(favoriteCharacter);
   return (
-    <div className="p-[6px] rounded-xl bg-slate-600 flex flex-row hover:shadow-md transition-all hover:bg-slate-500">
+    <div className="p-[6px] rounded-xl bg-slate-400  dark:bg-slate-600 flex flex-row hover:shadow-md transition-all hover:bg-slate-500">
       <img className="rounded-lg w-24" src={favoriteCharacter.image} alt="" />
       <div className="p-2 flex flex-col py-3 justify-between">
         <h2 className="font-bold text-lg mb-2 sm:text-xl">
@@ -72,7 +72,7 @@ function ModalCharacter({ favoriteCharacter }) {
                 : "bg-green-500"
             } sm:w-4 sm:h-4`}
           ></div>
-          <div className="font-medium text-sm text-slate-700 sm:text-lg">
+          <div className="font-medium text-sm text-slate-700 sm:text-lg dark:text-slate-300">
             &nbsp; {favoriteCharacter.gender} - {favoriteCharacter.species}
           </div>
         </div>
