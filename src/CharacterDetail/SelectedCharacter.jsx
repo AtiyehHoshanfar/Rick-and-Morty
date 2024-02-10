@@ -1,6 +1,6 @@
 import { useCharacter } from "../context/CharacterProvider";
-
-function SelectedCharacter() {
+import { BsArrowLeftCircleFill } from "react-icons/bs";
+function SelectedCharacter({width,breakpoint,setGotoHome}) {
   const { selectedCharacter, favoriteCharacters, setFavoriteCharacters } =
     useCharacter();
 
@@ -10,12 +10,14 @@ function SelectedCharacter() {
 
   };
   return (
-    <div className="p-[6px] relative rounded-xl m-2 dark:bg-slate-700 bg-slate-300 flex flex-col sm:flex-row">
+    <div  className=" p-[6px] relative rounded-xl m-2 dark:bg-slate-700 bg-slate-300 flex flex-col sm:flex-row">
       <img
         className="rounded-lg sm:w-48"
         src={selectedCharacter.image}
         alt=""
       />
+
+      {width<breakpoint&&<BsArrowLeftCircleFill onClick={()=>setGotoHome(is=>!is)} className="absolute top-3 left-3 text-5xl text-red-800"/>}
       <button
         onClick={() => handleAddToFavoriteCharacter(selectedCharacter)}
         disabled={favoriteCharacters.find(

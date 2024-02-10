@@ -10,6 +10,7 @@ import Layout from "./Layout/Layout";
 import CharacterProvider from "./context/CharacterProvider";
 import EpisodeProvider from "./context/EpisodeProvider";
 import SearchProvider from "./context/SearchProvider";
+import { useState } from "react";
 
 const theme = extendTheme({
   colorSchemes: {
@@ -30,6 +31,7 @@ const theme = extendTheme({
   },
 });
 function App() {
+  const [gotoHome,setGotoHome]=useState(false)
   return (
     <SearchProvider>
     <CharacterProvider>
@@ -37,8 +39,8 @@ function App() {
         <CssVarsProvider theme={theme}>
           <div>
             <Toaster />
-            <Navbar />
-            <Layout />
+            <Navbar setGotoHome={setGotoHome} />
+            <Layout gotoHome={gotoHome} setGotoHome={setGotoHome} />
           </div>
         </CssVarsProvider>
       </EpisodeProvider>

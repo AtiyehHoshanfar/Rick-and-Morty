@@ -2,11 +2,16 @@ import { useState } from "react";
 import { useCharacter } from "../context/CharacterProvider";
 import { useEpisode } from "../context/EpisodeProvider";
 import Episode from "../episodes/Episode";
-
+import { BsFillTrash3Fill } from "react-icons/bs";
 function Modal({ handleOpen }) {
-  const { favoriteCharacters } = useCharacter();
+  const { favoriteCharacters, setFavoriteCharacters } = useCharacter();
   const { favoriteEpisodes } = useEpisode();
   const [favoriteItem, setFavoriteItem] = useState("character");
+  const handleDeleteFavorite = (setFavorites, id) => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((favoriteItem) => favoriteItem.id !== id)
+    );
+  };
   return (
     <div className="flex justify-center">
       <div
@@ -39,13 +44,20 @@ function Modal({ handleOpen }) {
           {favoriteItem === "character" &&
             favoriteCharacters.map((favoriteCharacter) => (
               <ModalCharacter
+                onHandleDelete={handleDeleteFavorite}
+                setFavoriteCharacters={setFavoriteCharacters}
                 key={favoriteCharacter.id}
                 favoriteCharacter={favoriteCharacter}
               />
             ))}
           {favoriteItem === "episode" &&
             favoriteEpisodes.map((favoriteEpisode) => (
-              <Episode key={favoriteEpisode.id} episode={favoriteEpisode} />
+              <Episode
+                onHandleDelete={handleDeleteFavorite}
+                favoriteItem={favoriteItem}
+                key={favoriteEpisode.id}
+                episode={favoriteEpisode}
+              />
             ))}
         </div>
       </div>
@@ -54,29 +66,41 @@ function Modal({ handleOpen }) {
 }
 
 export default Modal;
-function ModalCharacter({ favoriteCharacter }) {
+function ModalCharacter({
+  favoriteCharacter,
+  setFavoriteCharacters,
+  onHandleDelete,
+}) {
   console.log(favoriteCharacter);
   return (
-    <div className="p-[6px] rounded-xl bg-slate-400  dark:bg-slate-600 flex flex-row hover:shadow-md transition-all hover:bg-slate-500">
-      <img className="rounded-lg w-24" src={favoriteCharacter.image} alt="" />
-      <div className="p-2 flex flex-col py-3 justify-between">
-        <h2 className="font-bold text-lg mb-2 sm:text-xl">
-          {favoriteCharacter.gender === "Male" ? "👨🏼" : "👩🏼"}{" "}
-          {favoriteCharacter.name}
-        </h2>
-        <div className="flex items-center">
-          <div
-            className={`w-3 h-3 rounded-full ${
-              favoriteCharacter.status === "Dead"
-                ? "bg-red-500"
-                : "bg-green-500"
-            } sm:w-4 sm:h-4`}
-          ></div>
-          <div className="font-medium text-sm text-slate-700 sm:text-lg dark:text-slate-300">
-            &nbsp; {favoriteCharacter.gender} - {favoriteCharacter.species}
+    <div className="justify-between items-center  p-[6px] rounded-xl bg-slate-400  dark:bg-slate-600 flex flex-row hover:shadow-md transition-all hover:bg-slate-500">
+      <div className="flex flex-row">
+        <img className="rounded-lg w-24" src={favoriteCharacter.image} alt="" />
+        <div className="p-2 flex flex-col py-3 justify-between">
+          <h2 className="font-bold text-lg mb-2 sm:text-xl">
+            {favoriteCharacter.gender === "Male" ? "👨🏼" : "👩🏼"}{" "}
+            {favoriteCharacter.name}
+          </h2>
+          <div className="flex items-center">
+            <div
+              className={`w-3 h-3 rounded-full ${
+                favoriteCharacter.status === "Dead"
+                  ? "bg-red-500"
+                  : "bg-green-500"
+              } sm:w-4 sm:h-4`}
+            ></div>
+            <div className="font-medium text-sm text-slate-700 sm:text-lg dark:text-slate-300">
+              &nbsp; {favoriteCharacter.gender} - {favoriteCharacter.species}
+            </div>
           </div>
         </div>
       </div>
+      <BsFillTrash3Fill
+        onClick={() =>
+          onHandleDelete(setFavoriteCharacters, favoriteCharacter.id)
+        }
+        className="cursor-pointer text-2xl sm:text-3xl text-red-500 mr-0 sm:mr-3"
+      />
     </div>
   );
 }

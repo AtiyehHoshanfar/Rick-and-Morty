@@ -1,10 +1,10 @@
 import Episodes from "../episodes/Episodes";
 import SelectedCharacter from "./SelectedCharacter";
 
-function CharacterDetail() {
+function CharacterDetail({width,breakpoint,setGotoHome}) {
   return (
     <div className="flex flex-col flex-1">
-      <SelectedCharacter />
+      <SelectedCharacter width={width} breakpoint={breakpoint} setGotoHome={setGotoHome} />
       <Episodes />
     </div>
   );

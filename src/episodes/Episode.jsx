@@ -1,5 +1,7 @@
 import { useEpisode } from "../context/EpisodeProvider";
-function Episode({ episode, children }) {
+import { BsFillTrash3Fill } from "react-icons/bs";
+
+function Episode({ episode, children, favoriteItem,onHandleDelete }) {
   const { favoriteEpisodes, setFavoriteEpisodes } = useEpisode();
 
   const handleAddToFavoriteEpisodes = (episode) => {
@@ -7,8 +9,9 @@ function Episode({ episode, children }) {
   };
   const episodeNum = episode.episode.slice(1).split("E");
   return (
-    <div className="bg-slate-300 dark:bg-slate-700 rounded-lg  p-2 m-2">
-      <div className="flex mb-1">
+    <div className="flex justify-between items-center bg-slate-300 dark:bg-slate-700 rounded-lg  p-2 m-2">
+<div>
+<div className="flex mb-1">
         <button
           style={{ fontSize: "1.6rem" }}
           onClick={() => handleAddToFavoriteEpisodes(episode)}
@@ -29,6 +32,10 @@ function Episode({ episode, children }) {
       <div className="font-bold text-md">
         {episode.episode} &bull; {episode.name}
       </div>
+</div>
+      {favoriteItem === "episode" && (
+        <BsFillTrash3Fill onClick={()=>onHandleDelete(setFavoriteEpisodes,episode.id)} className="cursor-pointer text-2xl sm:text-3xl text-red-500 mr-0 sm:mr-3" />
+      )}
     </div>
   );
 }

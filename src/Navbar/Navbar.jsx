@@ -1,5 +1,5 @@
 import { Badge } from "@mui/material";
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
 import Modal from "../Modal/Modal";
@@ -9,7 +9,7 @@ import useOutSideClick from "../hook/useOutSideClick";
 import { useEpisode } from "../context/EpisodeProvider";
 import { useSearch } from "../context/SearchProvider";
 
-function Navbar() {
+function Navbar({ setGotoHome }) {
   const menuRef = useRef();
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
   useOutSideClick(menuRef, "exceptionId", () => setOpenHamburgerMenu(false));
@@ -23,7 +23,7 @@ function Navbar() {
     setTheme(colorTheme);
     setDarkSide(checked.target.checked);
   };
-const { searchValue, setSearchValue }=useSearch()
+  const { searchValue, setSearchValue } = useSearch();
   return (
     <div>
       <div className="mx-auto container">
@@ -38,19 +38,26 @@ const { searchValue, setSearchValue }=useSearch()
             </li>
             <li className="hidden sm:block">
               <input
-              onChange={(e)=>setSearchValue(e.target.value)}
-              value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                value={searchValue}
                 type="search"
                 placeholder="search something ..."
                 className="p-[6px] outline-none border-none rounded-md bg-slate-200 dark:bg-slate-800 placeholder:text-sm"
               />
             </li>
-            <li className="hidden sm:block font-bold text-lg">found x items</li>
+            <li className="hidden sm:block font-bold text-lg">
+              found {} items
+            </li>
             <li
               className="hidden sm:block"
               onClick={() => setOpenFavorites((open) => !open)}
             >
-              <Badge badgeContent={favoriteCharacters.length+favoriteEpisodes.length} color="primary">
+              <Badge
+                badgeContent={
+                  favoriteCharacters.length + favoriteEpisodes.length
+                }
+                color="primary"
+              >
                 <HiOutlineHeart
                   color="action"
                   className="text-2xl text-red-500"
@@ -86,23 +93,27 @@ const { searchValue, setSearchValue }=useSearch()
                 <ul>
                   <li className="p-2">
                     <input
+                     onChange={(e) => setSearchValue(e.target.value)}
+                     value={searchValue}
                       type="search"
                       placeholder="search something ..."
                       className="w-[100%] p-2 bg-white dark:bg-slate-950 outline-none border-none rounded-lg"
                     />
                   </li>
-                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500">
+                  <li
+                    onClick={() => setGotoHome(true)}
+                    className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500"
+                  >
                     Home
                   </li>
-                  <li className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500"
-                  onClick={() => setOpenFavoritesMobile((open) => !open)}>
+                  <li
+                    className="rounded-md p-2 hover:transition-all hover:font-bold hover:bg-slate-500"
+                    onClick={() => setOpenFavoritesMobile((open) => !open)}
+                  >
                     Favorite
                   </li>
                   <li className=" flex items-center justify-between rounded-md  hover:transition-all hover:font-bold hover:bg-slate-500">
-                    <label
-                      htmlFor="toggle"
-                      className="block w-full h-full p-2"
-                    >
+                    <label htmlFor="toggle" className="block w-full h-full p-2">
                       Theme
                       <input
                         type="checkbox"
@@ -112,7 +123,6 @@ const { searchValue, setSearchValue }=useSearch()
                         className="hidden"
                       />
                     </label>
-
                   </li>
                 </ul>
               </div>
@@ -120,8 +130,8 @@ const { searchValue, setSearchValue }=useSearch()
           )}
         </nav>
       </div>
-      {openFavorites && <Modal  handleOpen={setOpenFavorites } />}
-      {openFavoritesMobile&&<Modal  handleOpen={setOpenFavoritesMobile } />}
+      {openFavorites && <Modal handleOpen={setOpenFavorites} />}
+      {openFavoritesMobile && <Modal handleOpen={setOpenFavoritesMobile} />}
     </div>
   );
 }
